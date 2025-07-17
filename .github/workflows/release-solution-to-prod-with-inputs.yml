@@ -36,17 +36,24 @@ on:
         description: 'Production environment url.'
         type: string
         required: true
-      CLIENT_ID: 
-        description: 'The client id'
+      BUILD_CLIENT_ID: 
+        description: 'The client id for build'
         type: string
         required: true
+      PROD_CLIENT_ID: 
+        description: 'The client id for prod'
+        type: string
+        required: true      
       TENANT_ID: 
         description: 'The tenant id'
         type: string
         required: true
     secrets:
-      envSecret:
-        description: 'The secret value for authentication using SPN'
+      buildEnvSecret:
+        description: 'The secret value for authentication using SPN for build'
+        required: true
+      prodEnvSecret:
+        description: 'The secret value for authentication using SPN for prod'
         required: true
 
 jobs:
@@ -72,8 +79,8 @@ jobs:
       uses: microsoft/powerplatform-actions/import-solution@v0
       with:
         environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.envSecret }}
+        app-id: ${{inputs.BUILD_CLIENT_ID}}
+        client-secret: ${{ secrets.buildEnvSecret }}
         tenant-id: ${{inputs.TENANT_ID}}
         solution-file: ${{ inputs.solution_outbound_folder}}/${{ inputs.solution_name }}.zip
         force-overwrite: true
@@ -83,8 +90,8 @@ jobs:
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.envSecret }} 
+        app-id: ${{inputs.BUILD_CLIENT_ID}}
+        client-secret: ${{ secrets.buildEnvSecret }} 
         tenant-id: ${{inputs.TENANT_ID}}
         solution-name: ${{ inputs.solution_name }}
         managed: true
@@ -116,8 +123,8 @@ jobs:
       uses: microsoft/powerplatform-actions/import-solution@v0
       with:
         environment-url: ${{inputs.PRODUCTION_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.envSecret }}
+        app-id: ${{inputs.PROD_CLIENT_ID}}
+        client-secret: ${{ secrets.prodEnvSecret }}
         tenant-id: ${{inputs.TENANT_ID}}
         solution-file: ${{ inputs.solution_release_folder}}/${{ inputs.solution_name }}_managed.zip
         force-overwrite: true
