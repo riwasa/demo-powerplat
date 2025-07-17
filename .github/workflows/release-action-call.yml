@@ -14,9 +14,9 @@ jobs:
       #You can specify the solution name here
       solution_name: GitHubDemoApp
       #Update your values here
-      BUILD_ENVIRONMENT_URL: ${{ env.POWER_PLATFORM_BUILD_URL }}
+      BUILD_ENVIRONMENT_URL: ${{ vars.POWER_PLATFORM_BUILD_URL }}
       PRODUCTION_ENVIRONMENT_URL: ${{ secrets.POWER_PLATFORM_PROD_URL }}
-      DEV_CLIENT_ID: ${{ env.POWER_PLATFORM_BUILD_CLIENT_ID }}
+      DEV_CLIENT_ID: ${{ vars.POWER_PLATFORM_BUILD_CLIENT_ID }}
       TENANT_ID: ${{ secrets.POWER_PLATFORM_TENANT_ID }}
       PROD_CLIENT_ID: ${{ secrets.POWER_PLATFORM_PROD_CLIENT_ID }}
     secrets:
