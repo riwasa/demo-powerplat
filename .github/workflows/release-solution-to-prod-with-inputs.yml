@@ -109,6 +109,7 @@ jobs:
   release-to-staging:
     needs: [ convert-to-managed ]
     runs-on: windows-latest
+    environment: Production
     env:
       RUNNER_DEBUG: 1
 
