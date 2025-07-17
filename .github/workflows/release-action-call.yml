@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/release-solution-to-prod-with-inputs.yml
     with:
       #You can specify the solution name here
-      solution_name: GitHub
+      solution_name: GitHubDemoApp
       #Update your values here
       BUILD_ENVIRONMENT_URL: ${{ secrets.POWER_PLATFORM_DEV_URL }}
       PRODUCTION_ENVIRONMENT_URL: ${{ secrets.POWER_PLATFORM_PROD_URL }}
