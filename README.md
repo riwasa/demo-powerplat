@@ -1,2 +1,2 @@
 # demo-powerplat
-Power Platform ALM demo
+Power Platform ALM demo.
