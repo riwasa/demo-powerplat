@@ -1,0 +1,24 @@
+name: Release action
+# Call the reusable workflow release-solution-with-inputs.yml
+# Release your solution to prod when you create a new release.
+
+on:
+  release:
+      types: [created]        
+permissions:
+  contents: write
+jobs:
+  Release-solution-ALMLab:
+    uses: ./.github/workflows/release-solution-to-prod-with-inputs.yml
+    with:
+      #You can specify the solution name here
+      solution_name: GitHub
+      #Update your values here
+      BUILD_ENVIRONMENT_URL: ${{ secrets.POWER_PLATFORM_DEV_URL }}
+      PRODUCTION_ENVIRONMENT_URL: ${{ secrets.POWER_PLATFORM_PROD_URL }}
+      DEV_CLIENT_ID: ${{ secrets.POWER_PLATFORM_DEV_CLIENT_ID }}
+      TENANT_ID: ${{ secrets.POWER_PLATFORM_TENANT_ID }}
+      PROD_CLIENT_ID: ${{ secrets.POWER_PLATFORM_PROD_CLIENT_ID }}
+    secrets:
+      devEnvSecret: ${{ secrets.POWER_PLATFORM_DEV_SPN }}
+      prodEnvSecret: ${{ secrets.POWER_PLATFORM_PROD_SPN }}
